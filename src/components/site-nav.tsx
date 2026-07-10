@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Menu, Moon, Sun, X } from "lucide-react";
+import { Lock, Menu, Moon, Sun, X } from "lucide-react";
 import { SITE } from "@/lib/site";
 
 const links = [
