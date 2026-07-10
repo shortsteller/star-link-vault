@@ -67,6 +67,14 @@ export function SiteNav() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <Link
+            to="/admin"
+            aria-label="Admin"
+            title="Admin"
+            className="hidden h-10 items-center gap-1.5 rounded-full border border-border/70 px-3 text-[11px] uppercase tracking-[0.2em] text-foreground/80 transition hover:border-gold hover:text-gold md:inline-flex"
+          >
+            <Lock className="h-3.5 w-3.5" /> Admin
+          </Link>
           <button
             aria-label="Toggle theme"
             onClick={toggleTheme}
