@@ -107,6 +107,13 @@ export function SiteNav() {
                 {l.label}
               </Link>
             ))}
+            <Link
+              to="/admin"
+              onClick={() => setOpen(false)}
+              className="mt-2 inline-flex items-center gap-2 py-3 text-sm uppercase tracking-[0.2em] text-foreground/80"
+            >
+              <Lock className="h-3.5 w-3.5" /> Admin
+            </Link>
           </nav>
         </div>
       ) : null}
