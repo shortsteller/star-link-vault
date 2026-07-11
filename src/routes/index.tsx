@@ -186,7 +186,7 @@ function Index() {
             >
               <div className="overflow-hidden rounded-2xl bg-beige">
                 <img
-                  src={p.image}
+                  src={p.imageUrls?.[0]}
                   alt={p.name}
                   loading="lazy"
                   className="aspect-square w-full object-cover transition-transform duration-700 group-hover:scale-105"
@@ -196,7 +196,7 @@ function Index() {
                 <p className="font-serif text-base">{p.name}</p>
                 <p className="text-sm text-gold">₹{p.price}</p>
               </div>
-              <p className="mt-1 text-xs text-muted-foreground">{p.short}</p>
+              <p className="mt-1 line-clamp-1 text-xs text-muted-foreground">{p.description}</p>
             </Link>
           ))}
         </div>
