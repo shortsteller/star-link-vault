@@ -129,7 +129,7 @@ function Index() {
               <Link to="/product/$id" params={{ id: p.id }}>
                 <div className="aspect-[4/5] overflow-hidden bg-beige">
                   <img
-                    src={p.image}
+                    src={p.imageUrls?.[0]}
                     alt={p.name}
                     loading="lazy"
                     className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
