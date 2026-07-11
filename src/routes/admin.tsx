@@ -78,7 +78,7 @@ function LoginCard() {
         <form className="mt-6 space-y-4" onSubmit={submit}>
           <div>
             <label className="text-xs uppercase tracking-[0.25em] text-muted-foreground">
-              Email
+              Username
             </label>
             <input
               type="email"
