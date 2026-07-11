@@ -8,6 +8,7 @@ import {
   Plus,
   Pencil,
   Trash2,
+  Upload,
   Search,
   X,
   ImagePlus,
