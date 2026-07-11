@@ -60,11 +60,11 @@ function ContactPage() {
 
           <div className="mt-8 flex gap-3">
             <WhatsAppButton message="Hi Udita's Creation!">WhatsApp</WhatsAppButton>
-            <a href={SITE.instagram} target="_blank" rel="noreferrer"
+            <a href={SITE.instagram} target="_blank" rel="noreferrer" aria-label={`Instagram — @${SITE.instagramHandle}`} title={`@${SITE.instagramHandle}`}
                className="grid h-11 w-11 place-items-center rounded-full border border-border transition hover:border-gold hover:text-gold">
               <Instagram className="h-4 w-4" />
             </a>
-            <a href={SITE.facebook} target="_blank" rel="noreferrer"
+            <a href={SITE.facebook} target="_blank" rel="noreferrer" aria-label={`Facebook — ${SITE.facebookName}`} title={SITE.facebookName}
                className="grid h-11 w-11 place-items-center rounded-full border border-border transition hover:border-gold hover:text-gold">
               <Facebook className="h-4 w-4" />
             </a>

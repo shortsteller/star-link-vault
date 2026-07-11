@@ -5,6 +5,7 @@ import { ArrowRight, Sparkles, Star } from "lucide-react";
 import hero from "@/assets/hero.jpg";
 import { CATEGORIES, PRODUCTS } from "@/lib/products";
 import { WhatsAppButton } from "@/components/wa-button";
+import { SITE } from "@/lib/site";
 import { subscribeProducts, type FirestoreProduct } from "@/lib/product-store";
 
 export const Route = createFileRoute("/")({

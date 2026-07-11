@@ -33,11 +33,11 @@ export function SiteFooter() {
             <li className="flex items-center gap-2"><Phone className="h-4 w-4 text-gold" /> {SITE.phone} · WhatsApp</li>
           </ul>
           <div className="mt-4 flex gap-3">
-            <a href={SITE.instagram} target="_blank" rel="noreferrer" aria-label="Instagram"
+            <a href={SITE.instagram} target="_blank" rel="noreferrer" aria-label={`Instagram — @${SITE.instagramHandle}`} title={`@${SITE.instagramHandle}`}
                className="grid h-10 w-10 place-items-center rounded-full border border-border/70 transition hover:border-gold hover:text-gold">
               <Instagram className="h-4 w-4" />
             </a>
-            <a href={SITE.facebook} target="_blank" rel="noreferrer" aria-label="Facebook"
+            <a href={SITE.facebook} target="_blank" rel="noreferrer" aria-label={`Facebook — ${SITE.facebookName}`} title={SITE.facebookName}
                className="grid h-10 w-10 place-items-center rounded-full border border-border/70 transition hover:border-gold hover:text-gold">
               <Facebook className="h-4 w-4" />
             </a>
