@@ -1,9 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { ArrowRight, Sparkles, Star } from "lucide-react";
 import hero from "@/assets/hero.jpg";
 import { CATEGORIES, PRODUCTS } from "@/lib/products";
 import { WhatsAppButton } from "@/components/wa-button";
+import { subscribeProducts, type FirestoreProduct } from "@/lib/product-store";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -16,9 +18,15 @@ const testimonials = [
 ];
 
 function Index() {
-  const featured = PRODUCTS.slice(0, 3);
-  const best = PRODUCTS.filter((p) => p.bestSeller);
+  const [items, setItems] = useState<FirestoreProduct[]>([]);
+  useEffect(() => {
+    const unsub = subscribeProducts((list) => setItems(list));
+    return () => unsub();
+  }, []);
+  const featured = items.filter((p) => p.featuredCollection);
+  const best = items.filter((p) => p.bestSeller);
   const insta = [0, 1, 2, 3, 4, 5];
+
   return (
     <div>
       <section className="relative overflow-hidden">
