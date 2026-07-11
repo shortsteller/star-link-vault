@@ -4,8 +4,10 @@ export const SITE = {
   whatsapp: "916289400578",
   email: "moumitasaha2514@gmail.com",
   phone: "+91 6289400578",
-  instagram: "https://instagram.com/",
-  facebook: "https://facebook.com/",
+  instagramHandle: "official_uditascreation",
+  instagram: "https://instagram.com/official_uditascreation",
+  facebookName: "Udita's Creations",
+  facebook: "https://www.facebook.com/search/top?q=udita%27s%20creations",
   address: "Kolkata, West Bengal, India",
 };
 
