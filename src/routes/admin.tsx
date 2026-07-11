@@ -603,3 +603,86 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
     </div>
   );
 }
+
+function ProductMenu({
+  product,
+  onEdit,
+  onDelete,
+}: {
+  product: FirestoreProduct;
+  onEdit: () => void;
+  onDelete: () => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onDoc = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", onDoc);
+    return () => document.removeEventListener("mousedown", onDoc);
+  }, [open]);
+
+  const toggleFlag = async (field: "featuredCollection" | "bestSeller") => {
+    try {
+      await editProduct(product.id, { [field]: !product[field] });
+    } catch (err) {
+      toast.error((err as Error).message);
+    }
+  };
+
+  return (
+    <div ref={ref} className="absolute right-2 top-2 z-10">
+      <button
+        onClick={() => setOpen((v) => !v)}
+        aria-label="Product options"
+        className="grid h-9 w-9 place-items-center rounded-full border border-border/70 bg-background/90 text-foreground/80 shadow-sm backdrop-blur transition hover:border-gold hover:text-gold"
+      >
+        <MoreVertical className="h-4 w-4" />
+      </button>
+      {open ? (
+        <div className="absolute right-0 mt-2 w-64 overflow-hidden rounded-xl border border-border bg-background p-1 shadow-lg">
+          <button
+            onClick={() => toggleFlag("featuredCollection")}
+            className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm hover:bg-muted"
+          >
+            <span className="grid h-4 w-4 place-items-center rounded border border-border">
+              {product.featuredCollection ? <Check className="h-3 w-3 text-gold" /> : null}
+            </span>
+            Add to Featured Curated Collections
+          </button>
+          <button
+            onClick={() => toggleFlag("bestSeller")}
+            className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm hover:bg-muted"
+          >
+            <span className="grid h-4 w-4 place-items-center rounded border border-border">
+              {product.bestSeller ? <Check className="h-3 w-3 text-gold" /> : null}
+            </span>
+            Add to Beloved Best Sellers
+          </button>
+          <div className="my-1 h-px bg-border" />
+          <button
+            onClick={() => {
+              setOpen(false);
+              onEdit();
+            }}
+            className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm hover:bg-muted"
+          >
+            <Pencil className="h-3.5 w-3.5" /> Edit Product
+          </button>
+          <button
+            onClick={() => {
+              setOpen(false);
+              onDelete();
+            }}
+            className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm text-red-600 hover:bg-red-500/10"
+          >
+            <Trash2 className="h-3.5 w-3.5" /> Delete Product
+          </button>
+        </div>
+      ) : null}
+    </div>
+  );
+}
