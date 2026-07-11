@@ -243,7 +243,7 @@ function Index() {
           {insta.map((i) => {
             const p = PRODUCTS[i % PRODUCTS.length];
             return (
-              <a key={i} href="https://instagram.com" target="_blank" rel="noreferrer"
+              <a key={i} href={SITE.instagram} target="_blank" rel="noreferrer"
                  className="group relative aspect-square overflow-hidden rounded-xl bg-beige">
                 <img src={p.image} alt="Instagram" loading="lazy"
                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
