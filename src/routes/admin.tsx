@@ -254,8 +254,13 @@ function Dashboard() {
         {filtered.map((p) => (
           <article
             key={p.id}
-            className="group flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card"
+            className="group relative flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card"
           >
+            <ProductMenu
+              product={p}
+              onEdit={() => setEditing(p)}
+              onDelete={() => handleDelete(p)}
+            />
             <div className="aspect-[4/5] overflow-hidden bg-beige">
               {p.imageUrls[0] ? (
                 <img
@@ -271,7 +276,7 @@ function Dashboard() {
               )}
             </div>
             <div className="flex flex-1 flex-col gap-2 p-4">
-              <div className="flex items-start justify-between gap-2">
+              <div className="flex items-start justify-between gap-2 pr-8">
                 <div>
                   <p className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
                     {p.category}
@@ -291,21 +296,19 @@ function Dashboard() {
               >
                 {p.stockStatus.replace("-", " ")}
               </span>
-              <p className="line-clamp-2 text-sm text-muted-foreground">{p.description}</p>
-              <div className="mt-auto flex gap-2 pt-2">
-                <button
-                  onClick={() => setEditing(p)}
-                  className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-full border border-border px-3 py-2 text-xs uppercase tracking-[0.2em] hover:border-gold hover:text-gold"
-                >
-                  <Pencil className="h-3.5 w-3.5" /> Edit
-                </button>
-                <button
-                  onClick={() => handleDelete(p)}
-                  className="inline-flex items-center justify-center gap-1.5 rounded-full border border-border px-3 py-2 text-xs uppercase tracking-[0.2em] hover:border-red-500 hover:text-red-500"
-                >
-                  <Trash2 className="h-3.5 w-3.5" />
-                </button>
+              <div className="flex flex-wrap gap-1.5">
+                {p.featuredCollection ? (
+                  <span className="inline-flex rounded-full border border-gold/50 px-2 py-0.5 text-[9px] uppercase tracking-[0.2em] text-gold">
+                    Featured
+                  </span>
+                ) : null}
+                {p.bestSeller ? (
+                  <span className="inline-flex rounded-full border border-gold/50 px-2 py-0.5 text-[9px] uppercase tracking-[0.2em] text-gold">
+                    Best seller
+                  </span>
+                ) : null}
               </div>
+              <p className="line-clamp-2 text-sm text-muted-foreground">{p.description}</p>
             </div>
           </article>
         ))}
