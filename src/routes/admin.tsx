@@ -8,10 +8,12 @@ import {
   Plus,
   Pencil,
   Trash2,
-  Upload,
   Search,
   X,
   ImagePlus,
+  MoreVertical,
+  Check,
+
 } from "lucide-react";
 import { auth } from "@/lib/firebase";
 import { useAuthUser } from "@/lib/use-auth";
