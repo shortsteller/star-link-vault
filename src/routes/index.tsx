@@ -65,7 +65,7 @@ function Index() {
             <div className="mt-12 grid grid-cols-3 gap-6 border-t border-border/60 pt-8">
               {[
                 ["Handcrafted", "Small-batch artisans"],
-                ["Free Shipping", "Across India"],
+                ["Shipping Available", "Across India"],
                 ["7-day", "Easy exchange"],
               ].map(([t, s]) => (
                 <div key={t}>
