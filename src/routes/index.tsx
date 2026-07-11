@@ -1,9 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { ArrowRight, Sparkles, Star } from "lucide-react";
 import hero from "@/assets/hero.jpg";
 import { CATEGORIES, PRODUCTS } from "@/lib/products";
 import { WhatsAppButton } from "@/components/wa-button";
+import { subscribeProducts, type FirestoreProduct } from "@/lib/product-store";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -16,9 +18,15 @@ const testimonials = [
 ];
 
 function Index() {
-  const featured = PRODUCTS.slice(0, 3);
-  const best = PRODUCTS.filter((p) => p.bestSeller);
+  const [items, setItems] = useState<FirestoreProduct[]>([]);
+  useEffect(() => {
+    const unsub = subscribeProducts((list) => setItems(list));
+    return () => unsub();
+  }, []);
+  const featured = items.filter((p) => p.featuredCollection);
+  const best = items.filter((p) => p.bestSeller);
   const insta = [0, 1, 2, 3, 4, 5];
+
   return (
     <div>
       <section className="relative overflow-hidden">
@@ -121,7 +129,7 @@ function Index() {
               <Link to="/product/$id" params={{ id: p.id }}>
                 <div className="aspect-[4/5] overflow-hidden bg-beige">
                   <img
-                    src={p.image}
+                    src={p.imageUrls?.[0]}
                     alt={p.name}
                     loading="lazy"
                     className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
@@ -178,7 +186,7 @@ function Index() {
             >
               <div className="overflow-hidden rounded-2xl bg-beige">
                 <img
-                  src={p.image}
+                  src={p.imageUrls?.[0]}
                   alt={p.name}
                   loading="lazy"
                   className="aspect-square w-full object-cover transition-transform duration-700 group-hover:scale-105"
@@ -188,7 +196,7 @@ function Index() {
                 <p className="font-serif text-base">{p.name}</p>
                 <p className="text-sm text-gold">₹{p.price}</p>
               </div>
-              <p className="mt-1 text-xs text-muted-foreground">{p.short}</p>
+              <p className="mt-1 line-clamp-1 text-xs text-muted-foreground">{p.description}</p>
             </Link>
           ))}
         </div>

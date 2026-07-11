@@ -23,6 +23,8 @@ export type FirestoreProduct = {
   price: number;
   stockStatus: StockStatus;
   imageUrls: string[];
+  featuredCollection?: boolean;
+  bestSeller?: boolean;
   createdAt?: Timestamp | null;
   updatedAt?: Timestamp | null;
 };
