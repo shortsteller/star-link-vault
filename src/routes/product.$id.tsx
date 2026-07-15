@@ -146,7 +146,10 @@ function ProductPage() {
           <p className="mt-6 whitespace-pre-line text-muted-foreground">{product.description}</p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            <WhatsAppButton className="min-w-[220px]">
+            <WhatsAppButton
+              className="min-w-[220px]"
+              message={`Hello! I would like to enquire about this product.\n\nProduct Name: ${product.name}\nCategory: ${product.category}\nPrice: ₹${product.price}\n\nProduct Link:\n${typeof window !== "undefined" ? window.location.href : ""}\n\nI am interested in purchasing this item. Please provide more details.`}
+            >
               Order on WhatsApp
             </WhatsAppButton>
             <button onClick={share}
@@ -159,7 +162,6 @@ function ProductPage() {
             {[
               ["Category", product.category],
               ["Availability", product.stockStatus.replace("-", " ")],
-              ["Shipping", "Free shipping across India. Ships in 2–3 days."],
             ].map(([k, v]) => (
               <div key={k} className="grid grid-cols-[120px_1fr] gap-4 px-5 py-4 text-sm">
                 <dt className="text-xs uppercase tracking-[0.25em] text-muted-foreground">{k}</dt>
