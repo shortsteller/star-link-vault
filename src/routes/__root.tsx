@@ -81,6 +81,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "google-site-verification", content: "7UOORm2YfYZuFOmHfxrQtMjAZvWOGONpCvGm1G9bGv4" },
       { title: "Udita's Creation — Elegant Handcrafted Jewelry" },
       { name: "description", content: "Handcrafted fashion jewelry for the modern Indian woman — earrings, necklaces, bangles, bracelets, rings, anklets and bridal sets." },
       { name: "author", content: "Udita's Creation" },
