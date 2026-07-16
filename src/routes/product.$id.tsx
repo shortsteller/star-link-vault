@@ -1,9 +1,10 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, Share2, ChevronRight, Loader2 } from "lucide-react";
+import { ArrowLeft, Share2, ChevronRight, Loader2, ShoppingBag } from "lucide-react";
 import { toast } from "sonner";
 import { getProductById, subscribeProducts, type FirestoreProduct } from "@/lib/product-store";
+import { addToCart } from "@/lib/cart-store";
 import { WhatsAppButton } from "@/components/wa-button";
 
 export const Route = createFileRoute("/product/$id")({
@@ -146,6 +147,23 @@ function ProductPage() {
           <p className="mt-6 whitespace-pre-line text-muted-foreground">{product.description}</p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
+            <button
+              type="button"
+              onClick={() => {
+                addToCart({
+                  id: product.id,
+                  name: product.name,
+                  category: product.category,
+                  price: product.price,
+                  image: product.imageUrls[0] ?? "",
+                });
+                toast.success("Product added to cart.");
+              }}
+              disabled={product.stockStatus === "out-of-stock"}
+              className="inline-flex min-w-[220px] items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-xs uppercase tracking-[0.25em] text-primary-foreground transition hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              <ShoppingBag className="h-4 w-4" /> Add to Cart
+            </button>
             <WhatsAppButton
               className="min-w-[220px]"
               message={`Hello! I would like to enquire about this product.\n\nProduct Name: ${product.name}\nCategory: ${product.category}\nPrice: ₹${product.price}\n\nProduct Link:\n${typeof window !== "undefined" ? window.location.href : ""}\n\nI am interested in purchasing this item. Please provide more details.`}

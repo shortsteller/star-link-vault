@@ -1,9 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { Loader2 } from "lucide-react";
+import { Loader2, ShoppingBag } from "lucide-react";
+import { toast } from "sonner";
 import { CATEGORIES } from "@/lib/products";
 import { subscribeProducts, type FirestoreProduct } from "@/lib/product-store";
+import { addToCart } from "@/lib/cart-store";
 import { WhatsAppButton } from "@/components/wa-button";
 
 export const Route = createFileRoute("/gallery")({
@@ -150,9 +152,28 @@ function GalleryPage() {
                   </span>
                 ) : null}
                 <p className="line-clamp-2 text-sm text-muted-foreground">{p.description}</p>
-                <WhatsAppButton variant="outline" className="mt-auto w-full">
-                  Order on WhatsApp
-                </WhatsAppButton>
+                <div className="mt-auto flex flex-col gap-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      addToCart({
+                        id: p.id,
+                        name: p.name,
+                        category: p.category,
+                        price: p.price,
+                        image: p.imageUrls[0] ?? "",
+                      });
+                      toast.success("Product added to cart.");
+                    }}
+                    disabled={p.stockStatus === "out-of-stock"}
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-xs uppercase tracking-[0.25em] text-primary-foreground transition hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    <ShoppingBag className="h-4 w-4" /> Add to Cart
+                  </button>
+                  <WhatsAppButton variant="outline" className="w-full">
+                    Order on WhatsApp
+                  </WhatsAppButton>
+                </div>
               </div>
             </motion.article>
           ))}

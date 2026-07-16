@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Lock, Menu, Moon, Sun, X } from "lucide-react";
+import { Lock, Menu, Moon, ShoppingBag, Sun, X } from "lucide-react";
+import { useCart } from "@/lib/cart-store";
 import { SITE } from "@/lib/site";
 
 const links = [
@@ -14,6 +15,8 @@ export function SiteNav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [dark, setDark] = useState(false);
+  const cart = useCart();
+  const cartCount = cart.reduce((s, i) => s + i.quantity, 0);
 
   useEffect(() => {
     const stored = localStorage.getItem("theme");
@@ -67,6 +70,19 @@ export function SiteNav() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <Link
+            to="/cart"
+            aria-label="Cart"
+            title="Cart"
+            className="relative grid h-10 w-10 place-items-center rounded-full border border-border/70 text-foreground/80 transition hover:border-gold hover:text-gold"
+          >
+            <ShoppingBag className="h-4 w-4" />
+            {cartCount > 0 ? (
+              <span className="absolute -right-1 -top-1 grid h-5 min-w-5 place-items-center rounded-full bg-gold px-1 text-[10px] font-medium text-background">
+                {cartCount}
+              </span>
+            ) : null}
+          </Link>
           <Link
             to="/admin"
             aria-label="Admin"
