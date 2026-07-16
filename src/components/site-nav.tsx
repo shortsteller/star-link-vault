@@ -71,6 +71,19 @@ export function SiteNav() {
 
         <div className="flex items-center gap-2">
           <Link
+            to="/cart"
+            aria-label="Cart"
+            title="Cart"
+            className="relative grid h-10 w-10 place-items-center rounded-full border border-border/70 text-foreground/80 transition hover:border-gold hover:text-gold"
+          >
+            <ShoppingBag className="h-4 w-4" />
+            {cartCount > 0 ? (
+              <span className="absolute -right-1 -top-1 grid h-5 min-w-5 place-items-center rounded-full bg-gold px-1 text-[10px] font-medium text-background">
+                {cartCount}
+              </span>
+            ) : null}
+          </Link>
+          <Link
             to="/admin"
             aria-label="Admin"
             title="Admin"
