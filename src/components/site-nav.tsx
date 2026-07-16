@@ -15,6 +15,8 @@ export function SiteNav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [dark, setDark] = useState(false);
+  const cart = useCart();
+  const cartCount = cart.reduce((s, i) => s + i.quantity, 0);
 
   useEffect(() => {
     const stored = localStorage.getItem("theme");
