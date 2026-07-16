@@ -1,9 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { Loader2 } from "lucide-react";
+import { Loader2, ShoppingBag } from "lucide-react";
+import { toast } from "sonner";
 import { CATEGORIES } from "@/lib/products";
 import { subscribeProducts, type FirestoreProduct } from "@/lib/product-store";
+import { addToCart } from "@/lib/cart-store";
 import { WhatsAppButton } from "@/components/wa-button";
 
 export const Route = createFileRoute("/gallery")({
