@@ -1,9 +1,10 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, Share2, ChevronRight, Loader2 } from "lucide-react";
+import { ArrowLeft, Share2, ChevronRight, Loader2, ShoppingBag } from "lucide-react";
 import { toast } from "sonner";
 import { getProductById, subscribeProducts, type FirestoreProduct } from "@/lib/product-store";
+import { addToCart } from "@/lib/cart-store";
 import { WhatsAppButton } from "@/components/wa-button";
 
 export const Route = createFileRoute("/product/$id")({
